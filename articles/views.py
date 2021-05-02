@@ -35,6 +35,7 @@ def get_or_create_articles(request):
             })
         else:
             #articles=Articles.objects.all()
+
             offest = request.GET.get('offest', 0)
             limit = request.GET.get("limit", 10)
             q = request.GET.get("q")
@@ -133,6 +134,63 @@ def login(request):
         "code":200,
         "authToken":token
     })
+
+
+
+from rest_framework.views import  APIView
+from rest_framework.response import Response
+from article.token_auth import TokenAuth
+from articles.serializers import ArtilceSerializer
+class ArticlesView(APIView):
+    authentication_classes = (TokenAuth,)
+    # authentication_classes = ()
+    def get(self,request):
+
+        atricles = Articles.objects.all()
+        # params = {
+        #     "title":request.GET.get("title"),
+        #     "email":request.GET.get("email"),
+        #     "offest":request.GET.get("offest"),
+        # }
+        # articleserializers = ArtilceSerializer(data=params)
+        #
+        # if  articleserializers.is_valid():   #articleserializers.errors解析并返回
+        #     return Response({
+        #         "code":200,
+        #         "errors":articleserializers.errors
+        #     })
+        # {'email': [ErrorDetail(string='Enter a valid email address.', code='invalid')],
+        #  'offest': [ErrorDetail(string='A valid integer is required.', code='invalid')]}
+
+        return Response({
+            "code":200,
+            "data":[],
+
+        })
+    def post(self,request):
+        return Response({
+            "code": 200,
+            "data": [],
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from articles.views import get_html,get_content,get_or_create_articles,get_article_or_update_or_delete,register,login
 from django.views.decorators.csrf import csrf_exempt
+from articles import views as articles_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('html',get_html),
@@ -24,7 +25,8 @@ urlpatterns = [
     #path('api/v1/articles',csrf_exempt(get_or_create_articles)),
     #path('api/v1/articles/<int:id>',csrf_exempt(get_article_or_update_or_delete)),
     path('api/v1/register',csrf_exempt(register)),
-    path('api/v1/login',csrf_exempt(login))
+    path('api/v1/login',csrf_exempt(login)),
+    path('api/v1/articles',csrf_exempt(articles_views.ArticlesView.as_view())),
 
 
 ]
